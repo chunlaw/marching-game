@@ -1,0 +1,42 @@
+{
+  "en": {
+    "translation": {
+      "initiative": "Take Black?"
+    }
+  },
+  "zh": {
+    "translation": {
+      "initiative": "執黑?",
+      "Challenge": "挑戰",
+      "Black's turn": "黑棋的回合",
+      "White's turn": "白棋的回合",
+      "Black wins!": "黑棋勝!",
+      "White wins!": "白棋勝!",
+      "Reset": "重來一次",
+      "lv1": "初出茅廬",
+      "lv2": "小試牛刀",
+      "lv3": "雙龍出海",
+      "lv4": "陰陽互沖",
+      "lv5": "天下無雙",
+      "lv6": "三國鼎立",
+      "lv7": "七國咁亂",
+      "lv8": "八面玲瓏",
+      "ruleTitle": "遊戲規則",
+      "rule 1": "1. 每回合揀選一隻棋子上下移動",
+      "rule 2": "2. 逼使敵方不能向前移動者勝",
+      "rule 3": "3. 黑方先行",
+      "AI Lv": "選擇對手",
+      "ai0": "小熊維尼",
+      "ai1": "城之內克也",
+      "ai2": "諸葛亮",
+      "ai3": "獨孤求敗",
+      "thinking...": "思考中",
+      "Your turn": "你的回合",
+      "You win!": "你贏了",
+      "You lose": "你輸了",
+      "Move limit": "最大移動距離",
+      "War line": "戰線",
+      "Level": "關卡"
+    } 
+  }
+}
