@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/chunlaw/marching-game/static/css/main.a617e044.chunk.css",
+    "main.js": "/chunlaw/marching-game/static/js/main.862698c0.chunk.js",
+    "main.js.map": "/chunlaw/marching-game/static/js/main.862698c0.chunk.js.map",
+    "runtime-main.js": "/chunlaw/marching-game/static/js/runtime-main.e7e10f31.js",
+    "runtime-main.js.map": "/chunlaw/marching-game/static/js/runtime-main.e7e10f31.js.map",
+    "static/js/2.0cef2168.chunk.js": "/chunlaw/marching-game/static/js/2.0cef2168.chunk.js",
+    "static/js/2.0cef2168.chunk.js.map": "/chunlaw/marching-game/static/js/2.0cef2168.chunk.js.map",
+    "static/js/3.4b5d1016.chunk.js": "/chunlaw/marching-game/static/js/3.4b5d1016.chunk.js",
+    "static/js/3.4b5d1016.chunk.js.map": "/chunlaw/marching-game/static/js/3.4b5d1016.chunk.js.map",
+    "index.html": "/chunlaw/marching-game/index.html",
+    "service-worker.js": "/chunlaw/marching-game/service-worker.js",
+    "service-worker.js.map": "/chunlaw/marching-game/service-worker.js.map",
+    "static/css/main.a617e044.chunk.css.map": "/chunlaw/marching-game/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.0cef2168.chunk.js.LICENSE.txt": "/chunlaw/marching-game/static/js/2.0cef2168.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e7e10f31.js",
+    "static/js/2.0cef2168.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.862698c0.chunk.js"
+  ]
+}
