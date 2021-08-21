@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { Divider, Drawer, FormControl, InputLabel, List, ListItem, ListItemText, MenuItem, Select, Typography } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 import GameContext from '../../GameContext'
 import { useTranslation } from 'react-i18next'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
@@ -8,8 +9,9 @@ import StarIcon from '@material-ui/icons/Star';
 import { AiColors, Level } from '../../constants'
 
 const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
-  const { aiLv, level, setLevel, setAiLv, records } = useContext(GameContext)
-  const { t } = useTranslation()
+  const { aiLv, level, setAiLv, records } = useContext(GameContext)
+  const { t, i18n } = useTranslation()
+  const history = useHistory()
   const classes = useStyles()
   const getDescription = ( {board, stepLimit} : {board: number[][], stepLimit: number} ): string => {
     return `${t('Move limit')}: ${stepLimit !== 100 ? stepLimit : '∞'}, ${t('War line')}: ${board[0].filter(r => r >= 0).length}`
@@ -35,10 +37,11 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
             value={aiLv}
             onChange={(e:any) => {setAiLv(e.target.value || 0)}}
           >
-            <MenuItem value={0}>{t('ai0')}</MenuItem>
-            <MenuItem value={1}>{t('ai1')}</MenuItem>
-            <MenuItem value={2}>{t('ai2')}</MenuItem>
-            <MenuItem value={3}>{t('ai3')}</MenuItem>
+            {
+              [0,1,2,3].map(v => (
+                <MenuItem key={`ai${v}-item`} value={v} className={classes.menuItem}>{t(`ai${v}`)} <StarIcon style={{color: AiColors[v]}} /></MenuItem>    
+              ))
+            }
           </Select>
         </FormControl>
         <Divider />
@@ -48,7 +51,7 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
               <ListItem
                 button
                 key={`level-${_level.lv}`}
-                onClick={() => setLevel(idx)}
+                onClick={() => history.replace(`/${i18n.language}/${idx+1}`)}
                 className={`${classes.listItem} ${level === idx ? classes.selectedItem : ''}`}
               >
                 <ListItemText
@@ -92,11 +95,21 @@ const useStyles = makeStyles(theme => ({
       background: '#eee'
     }
   },
+  menuItem: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  }, 
   selectedItem: {
     background: '#eee'
   },
   selectContainer: {
     width: '80%',
-    margin: '5%'
+    margin: '5%',
+    '& .MuiSelect-selectMenu': {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between'
+    }
   }
 }))

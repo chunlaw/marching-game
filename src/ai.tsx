@@ -19,7 +19,8 @@ export const getAvaliableSteps = (gameState: any) => {
       if ( isAvailableStep( board, round, {x: i, y: board[round%2][i]} , {x: i, y: j}, stepLimit ) ) {
         let _board = JSON.parse(JSON.stringify(board))
         _board[round%2][i] = j
-        steps.push([i, j, getNimSum(_board, stepLimit)])
+        const [nimSum, sum] = getNimSum(_board, stepLimit)
+        steps.push([i, j, nimSum, sum])
       }
     }
   }
@@ -32,9 +33,9 @@ export const getAiStep = ( steps: Array<number[]>, aiLv: number ) => {
   if ( Math.random() < AiRandomness[aiLv] ) {
     return steps[getRandomInt(0, steps.length)]
   }
-  const bestMoves = steps.filter(step => step[2] === 0)
+  const bestMoves = steps.filter(step => step[2] === 0).sort( (a, b) => a[3] - b[3] )
   if ( bestMoves.length ) {
-    return bestMoves[getRandomInt(0, bestMoves.length)]
+    return bestMoves[0]
   }
   return steps[getRandomInt(0, steps.length)]
 }
@@ -47,9 +48,11 @@ export const getRandomInt = (min: number, max: number): number => {
 
 const getNimSum = ( board:number[][], stepLimit: number ) => {
   let nimSum = 0
+  let sum = 0
   for ( var i=0; i<board[0].length; ++i) {
     if ( board[0][i] < 0 ) continue
     nimSum ^= ( Math.abs(board[0][i] - board[1][i]) - 1 ) % (stepLimit + 1)
+    sum += ( Math.abs(board[0][i] - board[1][i]) - 1 )
   }
-  return nimSum
+  return [nimSum, sum]
 }

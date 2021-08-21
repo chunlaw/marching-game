@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getAvaliableSteps, getAiStep, getRandomInt } from './ai'
 import { GameStateProps, CoordinateProps, RecordsProps, Level } from './constants'
-import { validLv } from './utils'
+import { validLv, vibrate } from './utils'
 
 interface GameContextProps {
   level: number,
@@ -58,7 +58,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
             round: prev.round + 1
           } 
         })
-      }, getRandomInt(500, 1500) ) // pretend to think.....
+      }, getRandomInt(750, 2000) ) // pretend to think.....
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState])
@@ -78,6 +78,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
 
   const onBoardClick = ( coor: CoordinateProps, validStep: boolean|undefined ) => {
     if ( winner ) return;
+    vibrate(1);
     const { board, round } = gameState
     const { x, y } = coor
     if ( selectedToken !== null && selectedToken.x === x && selectedToken.y === y ) {
