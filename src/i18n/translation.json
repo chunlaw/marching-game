@@ -1,7 +1,24 @@
 {
   "en": {
     "translation": {
-      "initiative": "Take Black?"
+      "initiative": "Take Black?",
+      "lv1": "September campaign",
+      "lv2": "Phoney War",
+      "lv3": "Operation Weserübung",
+      "lv4": "Fall of Hong Kong",
+      "lv5": "Battle of the Java Sea",
+      "lv6": "Attack on Peral Harbor",
+      "lv7": "Operation Overlord",
+      "lv8": "Atomic Bombing",
+      "ruleTitle": "Game Rule",
+      "rule 1": "1. Player moves a single chess piece in each round",
+      "rule 2": "2. Winner will force the opponent to be unable to move forward",
+      "rule 3": "3. Black goes first",
+      "AI Lv": "Choose opponent",
+      "ai0": "Winnie the Pooh",
+      "ai1": "Joey Wheeler",
+      "ai2": "Merlin",
+      "ai3": "Gandalf"
     }
   },
   "zh": {
@@ -36,7 +53,8 @@
       "You lose": "你輸了",
       "Move limit": "最大移動距離",
       "War line": "戰線",
-      "Level": "關卡"
+      "Level": "關卡",
+      ", obtain a ": "，獲得"
     } 
   }
 }

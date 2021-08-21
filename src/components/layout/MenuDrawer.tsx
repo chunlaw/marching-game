@@ -1,17 +1,18 @@
 import { useContext } from 'react'
 import { Divider, Drawer, FormControl, InputLabel, List, ListItem, ListItemText, MenuItem, Select, Typography } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core'
-import GameContext, { Level } from '../../GameContext'
+import GameContext from '../../GameContext'
 import { useTranslation } from 'react-i18next'
-// import StarBorderIcon from '@material-ui/icons/StarBorder';
-// import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
+import { AiColors, Level } from '../../constants'
 
 const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
-  const { aiLv, setLevel, setAiLv } = useContext(GameContext)
+  const { aiLv, level, setLevel, setAiLv, records } = useContext(GameContext)
   const { t } = useTranslation()
   const classes = useStyles()
   const getDescription = ( {board, stepLimit} : {board: number[][], stepLimit: number} ): string => {
-    return `${t('Move limit')}: ${stepLimit}, ${t('War line')}: ${board[0].filter(r => r >= 0).length}`
+    return `${t('Move limit')}: ${stepLimit !== 100 ? stepLimit : '∞'}, ${t('War line')}: ${board[0].filter(r => r >= 0).length}`
   }
 
   return (
@@ -42,21 +43,28 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
         </FormControl>
         <Divider />
         <List>
-        {
-          Level.map((level, idx) => (
-            <ListItem
-              button
-              key={`level-${level.lv}`}
-              onClick={() => setLevel(idx)}
-            >
-              <ListItemText
-                primary={t("Level") + ` ${level.lv.replace('lv', '')}: ` + t(level.lv)}
-                secondary={getDescription(level)}
-              />
-              
-            </ListItem>
-          ))
-        }
+          {
+            Level.map((_level, idx) => (
+              <ListItem
+                button
+                key={`level-${_level.lv}`}
+                onClick={() => setLevel(idx)}
+                className={`${classes.listItem} ${level === idx ? classes.selectedItem : ''}`}
+              >
+                <ListItemText
+                  primary={t("Level") + ` ${_level.lv.replace('lv', '')}: ` + t(_level.lv)}
+                  secondary={getDescription(_level)}
+                />
+                {
+                  records[idx].map( (record: number, i: number) => (
+                    record ? 
+                      <StarIcon key={`star-${idx}-${i}`} style={{color: AiColors[i]}}></StarIcon> : 
+                      <StarBorderIcon key={`star-${idx}-${i}`} style={{color: AiColors[i]}}></StarBorderIcon>
+                  )) 
+                }
+              </ListItem>
+            ))
+          }
         </List>
       </div>
     </Drawer>
@@ -78,6 +86,14 @@ const useStyles = makeStyles(theme => ({
   rulesContainer: {
     paddingLeft: '10px',
     marginBottom: '10px'
+  },
+  listItem: {
+    '&:hover': {
+      background: '#eee'
+    }
+  },
+  selectedItem: {
+    background: '#eee'
   },
   selectContainer: {
     width: '80%',
