@@ -15,7 +15,7 @@ import MenuDrawer from './MenuDrawer'
 import MenuIcon from '@material-ui/icons/Menu'
 
 const Header = () => {
-  const { gameState: {lv} } = useContext(GameContext)
+  const { gameState: {lv}, level } = useContext(GameContext)
   const [ open, setOpen ] = useState(false)
   const { t, i18n } = useTranslation()
   const classes = useStyles()
@@ -34,7 +34,7 @@ const Header = () => {
         onClick={() => setOpen(true)}
       ><MenuIcon/></IconButton>
       <MenuDrawer open={open} onClose={() => setOpen(false)} />
-      <Typography variant="subtitle1">{t(lv)}</Typography>
+      <Typography variant="subtitle1">{`${t('Level')} ${level+1} - ${t(lv)}`}</Typography>
       <Tabs className={classes.languageTabs}
           value={i18n.language}
           onChange={(e, v) => handleLanguageChange(v)}
