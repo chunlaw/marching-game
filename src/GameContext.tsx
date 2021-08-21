@@ -132,7 +132,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
   }
 
   const updateRecords = ( lv: number, aiLv: number ): void => {
-    if ( records[lv][aiLv] ) return;
+    if ( records[lv] && records[lv][aiLv] ) return;
     setRecords( (prev: RecordsProps) => {
       const ret = {...prev}
       if ( !ret[lv] ) ret[lv] = [0, 0, 0, 0]
