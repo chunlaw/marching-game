@@ -104,9 +104,14 @@ export const GameContextProvider = ({children}: {children: any}) => {
     const _gameState = JSON.parse(JSON.stringify(Level[level]))
     if ( _gameState.random ) {
       _gameState.stepLimit = getRandomInt(0, 10) 
+      const warlines = [1, 1, 0, 1, 1, 0, 1, 0].map(v => {
+        if ( v ) return v
+        else return getRandomInt(0, 2)
+      })
+      console.log(warlines)
       _gameState.board = [
-        [0, 0, 0, 0, 0, 0, 0, 0].map(() => getRandomInt(0, 4)),
-        [0, 0, 0, 0, 0, 0, 0, 0].map(() => getRandomInt(5, 9)),
+        warlines.map(v => v ? getRandomInt(0, 4) : -9 ),
+        warlines.map(v => v ? getRandomInt(5, 9) : -8 ),
       ]
     }
     setGameState(_gameState)
