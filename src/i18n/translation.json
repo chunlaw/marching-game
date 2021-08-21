@@ -10,6 +10,7 @@
       "lv6": "Attack on Peral Harbor",
       "lv7": "Operation Overlord",
       "lv8": "Atomic Bombing",
+      "lv9": "Siege of Budapest",
       "ruleTitle": "Game Rule",
       "rule 1": "1. Player moves a single chess piece in each round",
       "rule 2": "2. Winner will force the opponent to be unable to move forward",
@@ -38,6 +39,7 @@
       "lv6": "三國鼎立",
       "lv7": "七國咁亂",
       "lv8": "八面玲瓏",
+      "lv9": "究竟涅槃",
       "ruleTitle": "遊戲規則",
       "rule 1": "1. 每回合揀選一隻棋子上下移動",
       "rule 2": "2. 逼使敵方不能向前移動者勝",
@@ -54,7 +56,8 @@
       "Move limit": "最大移動距離",
       "War line": "戰線",
       "Level": "關卡",
-      ", obtain a ": "，獲得"
+      ", obtain a ": "，獲得",
+      "Random Setup": "隨機設定"
     } 
   }
 }

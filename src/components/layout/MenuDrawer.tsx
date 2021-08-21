@@ -13,7 +13,8 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
   const { t, i18n } = useTranslation()
   const history = useHistory()
   const classes = useStyles()
-  const getDescription = ( {board, stepLimit} : {board: number[][], stepLimit: number} ): string => {
+  const getDescription = ( {board, stepLimit, random} : {board: number[][], stepLimit: number, random?: boolean} ): string => {
+    if ( random ) return t('Random Setup')
     return `${t('Move limit')}: ${stepLimit !== 100 ? stepLimit : '∞'}, ${t('War line')}: ${board[0].filter(r => r >= 0).length}`
   }
 
@@ -59,7 +60,7 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
                   secondary={getDescription(_level)}
                 />
                 {
-                  records[idx].map( (record: number, i: number) => (
+                  (records[idx] || [0, 0, 0, 0]).map( (record: number, i: number) => (
                     record ? 
                       <StarIcon key={`star-${idx}-${i}`} style={{color: AiColors[i]}}></StarIcon> : 
                       <StarBorderIcon key={`star-${idx}-${i}`} style={{color: AiColors[i]}}></StarBorderIcon>

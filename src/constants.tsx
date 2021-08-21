@@ -70,6 +70,16 @@ export const Level = [
     stepLimit: 3,
     isAi: true,
     playerFirst: true
+  },
+  {
+    lv: 'lv9',
+    board: [[0, 1, 0, 2, 0, 1, 2, 0], [9, 7, 9, 8, 9, 8, 9, 7]],
+    turn: 0,
+    round: 0,
+    stepLimit: 3,
+    random: true,
+    isAi: true,
+    playerFirst: true
   }
 ]
 
@@ -81,6 +91,7 @@ export interface CoordinateProps {
 export interface GameStateProps {
   lv: string;
   board: number[][];
+  random?: boolean;
   round: number;
   stepLimit: number;
   isAi: boolean;

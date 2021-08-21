@@ -101,7 +101,15 @@ export const GameContextProvider = ({children}: {children: any}) => {
 
   const resetGame = () : void => {
     setWinner(null)
-    setGameState(JSON.parse(JSON.stringify(Level[level])))
+    const _gameState = JSON.parse(JSON.stringify(Level[level]))
+    if ( _gameState.random ) {
+      _gameState.stepLimit = getRandomInt(0, 10) 
+      _gameState.board = [
+        [0, 0, 0, 0, 0, 0, 0, 0].map(() => getRandomInt(0, 4)),
+        [0, 0, 0, 0, 0, 0, 0, 0].map(() => getRandomInt(5, 9)),
+      ]
+    }
+    setGameState(_gameState)
   }
 
   const toggleAi = () : void => {
@@ -127,6 +135,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
     if ( records[lv][aiLv] ) return;
     setRecords( (prev: RecordsProps) => {
       const ret = {...prev}
+      if ( !ret[lv] ) ret[lv] = [0, 0, 0, 0]
       ret[lv][aiLv] = 1
       return ret
     })
