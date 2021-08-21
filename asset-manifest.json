@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/marching-game/static/css/main.a617e044.chunk.css",
-    "main.js": "/marching-game/static/js/main.0c4b1414.chunk.js",
-    "main.js.map": "/marching-game/static/js/main.0c4b1414.chunk.js.map",
+    "main.js": "/marching-game/static/js/main.9c9f27f0.chunk.js",
+    "main.js.map": "/marching-game/static/js/main.9c9f27f0.chunk.js.map",
     "runtime-main.js": "/marching-game/static/js/runtime-main.f4bc1fcd.js",
     "runtime-main.js.map": "/marching-game/static/js/runtime-main.f4bc1fcd.js.map",
-    "static/js/2.9dc847e1.chunk.js": "/marching-game/static/js/2.9dc847e1.chunk.js",
-    "static/js/2.9dc847e1.chunk.js.map": "/marching-game/static/js/2.9dc847e1.chunk.js.map",
+    "static/js/2.b1035cda.chunk.js": "/marching-game/static/js/2.b1035cda.chunk.js",
+    "static/js/2.b1035cda.chunk.js.map": "/marching-game/static/js/2.b1035cda.chunk.js.map",
     "static/js/3.41fd10e1.chunk.js": "/marching-game/static/js/3.41fd10e1.chunk.js",
     "static/js/3.41fd10e1.chunk.js.map": "/marching-game/static/js/3.41fd10e1.chunk.js.map",
     "index.html": "/marching-game/index.html",
     "service-worker.js": "/marching-game/service-worker.js",
     "service-worker.js.map": "/marching-game/service-worker.js.map",
     "static/css/main.a617e044.chunk.css.map": "/marching-game/static/css/main.a617e044.chunk.css.map",
-    "static/js/2.9dc847e1.chunk.js.LICENSE.txt": "/marching-game/static/js/2.9dc847e1.chunk.js.LICENSE.txt"
+    "static/js/2.b1035cda.chunk.js.LICENSE.txt": "/marching-game/static/js/2.b1035cda.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.f4bc1fcd.js",
-    "static/js/2.9dc847e1.chunk.js",
+    "static/js/2.b1035cda.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.0c4b1414.chunk.js"
+    "static/js/main.9c9f27f0.chunk.js"
   ]
 }
