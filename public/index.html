@@ -12,6 +12,15 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0GLXTJG1N4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-0GLXTJG1N4');
+    </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -21,6 +30,9 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <meta property="og:title" content="籌幄 - 博奕" />
+    <meta property="og:description" content="遊戲規則： 1. 每回合揀選一隻棋子上下移動； 2. 逼使敵方不能向前移動者勝；3. 黑方先行" />
+    <meta property="og:image" content="https://chunlaw.github.io/marching-game/marching.jpg" />
     <title>籌幄 - 博奕</title>
   </head>
   <body>

@@ -72,7 +72,7 @@ const GamePanel = () => {
 }
 
 const InfoMsg = ( ) => {
-  const { gameState: {round, playerFirst, isAi}, aiLv, winner } = useContext(GameContext) 
+  const { gameState: {round, playerFirst, isAi}, isMisere, aiLv, winner } = useContext(GameContext) 
   const { t } = useTranslation()
   const infoMsg = () : string => {
     if ( winner ) {
@@ -87,7 +87,7 @@ const InfoMsg = ( ) => {
     if ( isAi ) {
       if ( ( round % 2 === 0 ) === playerFirst )
         return t(`Your turn`)
-      return t(`ai${aiLv}`) + t('thinking...')
+      return t(`${isMisere ? 'm' : ''}ai${aiLv}`) + t('thinking...')
     }
     return t(`${PlayerName[round%2]}'s turn`)
   }

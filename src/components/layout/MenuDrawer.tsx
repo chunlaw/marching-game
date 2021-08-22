@@ -1,10 +1,11 @@
 import { useContext } from 'react'
-import { Divider, Drawer, FormControl, InputLabel, List, ListItem, ListItemText, MenuItem, Select, Typography } from "@material-ui/core"
+import { Avatar, Divider, Drawer, FormControl, InputLabel, List, ListItem, ListItemAvatar, ListItemText, MenuItem, Select, Typography } from "@material-ui/core"
 import { FormControlLabel, Switch } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import GameContext from '../../GameContext'
 import { useTranslation } from 'react-i18next'
+import GitHubIcon from '@material-ui/icons/GitHub'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/Star';
 import { AiColors, Level, MisereLevelOffset } from '../../constants'
@@ -81,6 +82,37 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
               </ListItem>
             ))
           }
+        </List>
+        <Divider />
+        <List>
+          <ListItem
+            button
+            component={'a'}
+            href={'https://www.freepik.com'}
+            target="_blank"
+          >
+            <ListItemAvatar>
+              <Avatar src="/marching-game/logo128.png" alt="App logo" />
+            </ListItemAvatar>
+            <ListItemText
+              primary={'Icons made by Freepik'}
+              secondary={'from www.flaticon.com'}
+            ></ListItemText>    
+          </ListItem>
+          <ListItem
+            button
+            component={'a'}
+            href={'https://www.github.com/chunlaw/marching-game'}
+            target="_blank"
+          >
+            <ListItemAvatar>
+              <Avatar><GitHubIcon /></Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={'Source code'}
+              secondary={'GPL-3.0 License'}
+            ></ListItemText>
+          </ListItem>
         </List>
       </div>
     </Drawer>

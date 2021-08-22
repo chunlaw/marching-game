@@ -80,7 +80,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
   }, [records])
 
   useEffect(() => {
-    document.getElementsByTagName('body')[0].style.cssText = isMisere ? "filter: invert(1); background: black" : ""    
+    document.getElementsByTagName('body')[0].style.cssText = isMisere ? "filter: invert(1); background: black; height: 100vh" : ""    
   }, [isMisere])
 
   const onBoardClick = ( coor: CoordinateProps, validStep: boolean|undefined ) => {
@@ -110,7 +110,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
     setWinner(null)
     const _gameState = JSON.parse(JSON.stringify(Level[level]))
     if ( _gameState.random ) {
-      _gameState.stepLimit = getRandomInt(0, 10) 
+      _gameState.stepLimit = getRandomInt(2, 10) 
       const warlines = [1, 1, 0, 1, 1, 0, 1, 0].map(v => {
         if ( v ) return v
         else return getRandomInt(0, 2)
