@@ -24,10 +24,7 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
       open={open} 
       ModalProps={{ onBackdropClick: onClose }}
       className={classes.container} 
-      PaperProps={{
-        className: classes.innerContainer, 
-        style: {filter: `invert(${isMisere ? 1 : 0})`}}
-      }
+      PaperProps={{className: classes.innerContainer}}
     >
       <div>
         <div className={classes.rulesContainer}>
@@ -40,7 +37,6 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
               <Switch
                 checked={isMisere}
                 onChange={() => toggleMisere()}
-                // disabled={Object.values(records).reduce((acc, arr) => acc || arr.filter((v:number) => v === 0).length, false)} // enable only if clean all normals
               ></Switch>
             }
             label={`${t('reverse rule 2')}`}
@@ -56,7 +52,7 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
           >
             {
               [0,1,2,3].map(v => (
-                <MenuItem key={`ai${v}-item`} value={v} className={classes.menuItem}>{t(`ai${v}`)} <StarIcon style={{color: AiColors[v]}} /></MenuItem>    
+                <MenuItem key={`ai${v}-item`} value={v} className={classes.menuItem}>{t(`${isMisere?'m':''}ai${v}`)} <StarIcon style={{color: AiColors[v]}} /></MenuItem>    
               ))
             }
           </Select>

@@ -79,6 +79,10 @@ export const GameContextProvider = ({children}: {children: any}) => {
     localStorage.setItem('@records', JSON.stringify(records))
   }, [records])
 
+  useEffect(() => {
+    document.getElementsByTagName('body')[0].style.cssText = isMisere ? "filter: invert(1); background: black" : ""    
+  }, [isMisere])
+
   const onBoardClick = ( coor: CoordinateProps, validStep: boolean|undefined ) => {
     if ( winner ) return;
     vibrate(1);
@@ -111,7 +115,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
         if ( v ) return v
         else return getRandomInt(0, 2)
       })
-      console.log(warlines)
+
       _gameState.board = [
         warlines.map(v => v ? getRandomInt(0, 4) : -9 ),
         warlines.map(v => v ? getRandomInt(5, 9) : -8 ),

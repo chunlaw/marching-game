@@ -4,7 +4,7 @@ import GameContext from '../GameContext'
 import { useContext } from 'react'
 
 const Playground = () => {
-  const { gameState: {board}, onBoardClick } = useContext(GameContext)
+  const { gameState: {board}, isMisere, onBoardClick } = useContext(GameContext)
   const classes = useStyles()
 
   const X = 'ABCDEFGH'.split('')
@@ -17,14 +17,14 @@ const Playground = () => {
   }
   
   return (
-    <div className={classes.container}>
-      <div className={classes.yAxisContainer}>
+    <div className={classes.container} style={{filter: `invert(${isMisere ? 1 : 0})`}}>
+      <div className={classes.yAxisContainer} style={{filter: `invert(${isMisere ? 1 : 0})`}}>
         {Y.map((y, i) => <div key={`axis-${i}`}>{i+1}</div>)}
       </div>
       {
         X.map((x, i) => (
           <div key={`line-${x}`} className={classes.lineContainer}>
-            <div>{x}</div>
+            <div style={{filter: `invert(${isMisere ? 1 : 0})`}}>{x}</div>
             {
               Y.map((y, j) => (
                 <Grid 

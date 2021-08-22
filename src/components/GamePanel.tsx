@@ -12,7 +12,7 @@ import { validLv } from '../utils';
 
 const GamePanel = () => {
   const { lvId } = useParams<{lvId: string | undefined}>()
-  const { gameState: {round, playerFirst, isAi}, aiLv, toggleAi, togglePlayer, resetGame } = useContext(GameContext) 
+  const { gameState: {round, playerFirst, isAi}, isMisere, aiLv, toggleAi, togglePlayer, resetGame } = useContext(GameContext) 
   const classes = useStyles()
   const { t, i18n } = useTranslation()
   const history = useHistory()
@@ -54,7 +54,7 @@ const GamePanel = () => {
               disabled={round !== 0}
             ></Switch>
           }
-          label={`${t('Challenge')} ${t('ai'+aiLv)}`}
+          label={`${t('Challenge')} ${t((isMisere ? 'm' : '')+'ai'+aiLv)}`}
         />
         <FormControlLabel
           control={

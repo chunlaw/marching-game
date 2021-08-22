@@ -21,7 +21,11 @@
       "ai1": "Joey Wheeler",
       "ai2": "Merlin",
       "ai3": "Gandalf",
-      "reverse rule 2": "Reverse rule 2"
+      "mai0": "Donald Duck",
+      "mai1": "Seto Kaiba",
+      "mai2": "Arthur the King",
+      "mai3": "Sauron",
+      "reverse rule 2": "Shadow Game (Reveral rule)"
     }
   },
   "zh": {
@@ -52,6 +56,10 @@
       "ai1": "城之內克也",
       "ai2": "諸葛孔明",
       "ai3": "獨孤求敗",
+      "mai0": "唐老鴨",
+      "mai1": "海馬賴人",
+      "mai2": "司馬懿",
+      "mai3": "菩提達摩",
       "thinking...": "思考中",
       "Your turn": "你的回合",
       "You win!": "你贏了",
@@ -61,7 +69,7 @@
       "Level": "關卡",
       ", obtain a ": "，獲得",
       "Random Setup": "隨機設定",
-      "reverse rule 2": "二週目，反轉規則"
+      "reverse rule 2": "黑暗遊戲（勝負條件反轉）"
     } 
   }
 }
