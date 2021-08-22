@@ -29,11 +29,11 @@ export const getAvaliableSteps = (gameState: any) => {
 
 const AiRandomness = [0.75, 0.5, 0.25, 0]
 
-export const getAiStep = ( steps: Array<number[]>, aiLv: number ) => {
+export const getAiStep = ( steps: Array<number[]>, aiLv: number, isMisere: boolean ) => {
   if ( Math.random() < AiRandomness[aiLv] ) {
     return steps[getRandomInt(0, steps.length)]
   }
-  const bestMoves = steps.filter(step => step[2] === 0).sort( (a, b) => a[3] - b[3] )
+  const bestMoves = steps.filter(step => step[2] === (isMisere ? 1 : 0)).sort( (a, b) => a[3] - b[3] )
   if ( bestMoves.length ) {
     return bestMoves[0]
   }

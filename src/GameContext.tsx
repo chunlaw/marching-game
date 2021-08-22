@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getAvaliableSteps, getAiStep, getRandomInt } from './ai'
-import { GameStateProps, CoordinateProps, RecordsProps, Level } from './constants'
+import { GameStateProps, CoordinateProps, RecordsProps, Level, MisereLevelOffset } from './constants'
 import { validLv, vibrate } from './utils'
 
 interface GameContextProps {
@@ -11,12 +11,14 @@ interface GameContextProps {
   selectedToken: CoordinateProps | null;
   winner: number|null;
   records: RecordsProps;
+  isMisere: boolean;
   onBoardClick: (c: CoordinateProps, validStep: boolean|undefined) => void;
   resetGame: () => void;
   setLevel: (idx: number) => void;
   setAiLv: (lv: number) => void;
   toggleAi: () => void;
   togglePlayer: () => void;
+  toggleMisere: () => void;
 }
 
 const GameContext = React.createContext({} as GameContextProps)
@@ -28,6 +30,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
   const [selectedToken, setSelectedToken] = useState<CoordinateProps | null>(null)
   const [winner, setWinner] = useState<number|null>(null)
   const [records, setRecords] = useState<RecordsProps>(JSON.parse(localStorage.getItem('@records') || 'null') || Level.reduce((acc, lv, idx) => ({...acc, [idx]: [0,0,0,0]}), {}))
+  const [isMisere, setIsMisere] = useState<boolean>(false)
   const aiLv = useRef<number>(0)
 
   useEffect(() => {
@@ -38,7 +41,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
     }
     
     if ( sum === 0 ) {
-      const _winner = round % 2 ? 1 : 2
+      const _winner = 2 - ( ( round % 2 ) ^ ( isMisere ? 1 : 0 ) )
       setWinner(_winner)
 
       const { isAi, playerFirst } = gameState
@@ -47,7 +50,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
       }
     } else if ( gameState.isAi && ( gameState.round % 2 === 1 ) === gameState.playerFirst ) {
       const steps = getAvaliableSteps(gameState)
-      const [x, y] = getAiStep (steps, aiLv.current)
+      const [x, y] = getAiStep (steps, aiLv.current, isMisere)
       setTimeout ( () => {
         setGameState( prev => {
           const _board = JSON.parse(JSON.stringify(prev.board)) 
@@ -114,6 +117,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
         warlines.map(v => v ? getRandomInt(5, 9) : -8 ),
       ]
     }
+    _gameState.isAi = gameState.isAi
     setGameState(_gameState)
   }
 
@@ -131,12 +135,17 @@ export const GameContextProvider = ({children}: {children: any}) => {
     }))
   }
 
+  const toggleMisere = () : void => {
+    setIsMisere(!isMisere)
+  }
+
   const setAiLv = (lv: number) : void => {
     aiLv.current = lv
     resetGame()
   }
 
   const updateRecords = ( lv: number, aiLv: number ): void => {
+    lv += isMisere ? MisereLevelOffset : 0
     if ( records[lv] && records[lv][aiLv] ) return;
     setRecords( (prev: RecordsProps) => {
       const ret = {...prev}
@@ -151,9 +160,9 @@ export const GameContextProvider = ({children}: {children: any}) => {
       value={{
         aiLv: aiLv.current, level,
         gameState, selectedToken, 
-        winner, records,
+        winner, records, isMisere,
         onBoardClick, resetGame,
-        toggleAi, togglePlayer,
+        toggleAi, togglePlayer, toggleMisere,
         setLevel, setAiLv
       }}
     >

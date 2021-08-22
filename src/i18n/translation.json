@@ -14,12 +14,14 @@
       "ruleTitle": "Game Rule",
       "rule 1": "1. Player moves a single chess piece in each round",
       "rule 2": "2. Winner will force the opponent to be unable to move forward",
+      "rule 2 - isMisere": "2. Loser will make the opponent to be unable to move forward",
       "rule 3": "3. Black goes first",
       "AI Lv": "Choose opponent",
       "ai0": "Winnie the Pooh",
       "ai1": "Joey Wheeler",
       "ai2": "Merlin",
-      "ai3": "Gandalf"
+      "ai3": "Gandalf",
+      "reverse rule 2": "Reverse rule 2"
     }
   },
   "zh": {
@@ -43,6 +45,7 @@
       "ruleTitle": "遊戲規則",
       "rule 1": "1. 每回合揀選一隻棋子上下移動",
       "rule 2": "2. 逼使敵方不能向前移動者勝",
+      "rule 2 - isMisere": "2. 使敵方不能向前移動者敗",
       "rule 3": "3. 黑方先行",
       "AI Lv": "選擇對手",
       "ai0": "小熊維尼",
@@ -57,7 +60,8 @@
       "War line": "戰線",
       "Level": "關卡",
       ", obtain a ": "，獲得",
-      "Random Setup": "隨機設定"
+      "Random Setup": "隨機設定",
+      "reverse rule 2": "二週目，反轉規則"
     } 
   }
 }

@@ -104,3 +104,4 @@ export interface RecordsProps {
 
 export const AiColors = ['#E20613', '#824A02', '#A7A7AD', '#FEE101']
 export const PlayerName = ['Black', 'White']
+export const MisereLevelOffset = 1000

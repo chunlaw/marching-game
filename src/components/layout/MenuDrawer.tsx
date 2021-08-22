@@ -1,15 +1,16 @@
 import { useContext } from 'react'
 import { Divider, Drawer, FormControl, InputLabel, List, ListItem, ListItemText, MenuItem, Select, Typography } from "@material-ui/core"
+import { FormControlLabel, Switch } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import GameContext from '../../GameContext'
 import { useTranslation } from 'react-i18next'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/Star';
-import { AiColors, Level } from '../../constants'
+import { AiColors, Level, MisereLevelOffset } from '../../constants'
 
 const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
-  const { aiLv, level, setAiLv, records } = useContext(GameContext)
+  const { aiLv, level, setAiLv, records, isMisere, toggleMisere } = useContext(GameContext)
   const { t, i18n } = useTranslation()
   const history = useHistory()
   const classes = useStyles()
@@ -19,21 +20,36 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
   }
 
   return (
-    <Drawer open={open} onClose={onClose} className={classes.container} PaperProps={{className: classes.innerContainer}}>
-      <div
-        onClick={onClose}
-        onKeyDown={onClose}
-      >
+    <Drawer 
+      open={open} 
+      ModalProps={{ onBackdropClick: onClose }}
+      className={classes.container} 
+      PaperProps={{
+        className: classes.innerContainer, 
+        style: {filter: `invert(${isMisere ? 1 : 0})`}}
+      }
+    >
+      <div>
         <div className={classes.rulesContainer}>
           <Typography variant="h5">{t('ruleTitle')}</Typography>
           <Typography variant="body1">{t('rule 1')}</Typography>
-          <Typography variant="body1">{t('rule 2')}</Typography>
+          <Typography variant="body1">{ !isMisere ? t('rule 2') : t('rule 2 - isMisere')}</Typography>
           <Typography variant="body1">{t('rule 3')}</Typography>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={isMisere}
+                onChange={() => toggleMisere()}
+                // disabled={Object.values(records).reduce((acc, arr) => acc || arr.filter((v:number) => v === 0).length, false)} // enable only if clean all normals
+              ></Switch>
+            }
+            label={`${t('reverse rule 2')}`}
+          />
         </div>
         <Divider />
         <FormControl className={classes.selectContainer}>
           <InputLabel shrink id="ai-level-label">{t('AI Lv')}</InputLabel>
-          <Select 
+          <Select
             labelId="ai-level-label"
             value={aiLv}
             onChange={(e:any) => {setAiLv(e.target.value || 0)}}
@@ -60,7 +76,7 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
                   secondary={getDescription(_level)}
                 />
                 {
-                  (records[idx] || [0, 0, 0, 0]).map( (record: number, i: number) => (
+                  (records[idx + (isMisere ? MisereLevelOffset : 0)] || [0, 0, 0, 0]).map( (record: number, i: number) => (
                     record ? 
                       <StarIcon key={`star-${idx}-${i}`} style={{color: AiColors[i]}}></StarIcon> : 
                       <StarBorderIcon key={`star-${idx}-${i}`} style={{color: AiColors[i]}}></StarBorderIcon>
