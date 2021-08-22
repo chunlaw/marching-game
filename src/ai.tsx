@@ -19,8 +19,7 @@ export const getAvaliableSteps = (gameState: any) => {
       if ( isAvailableStep( board, round, {x: i, y: board[round%2][i]} , {x: i, y: j}, stepLimit ) ) {
         let _board = JSON.parse(JSON.stringify(board))
         _board[round%2][i] = j
-        const [nimSum, sum] = getNimSum(_board, stepLimit)
-        steps.push([i, j, nimSum, sum])
+        steps.push([i, j, ...getNimSum(_board, stepLimit)])
       }
     }
   }
@@ -29,11 +28,19 @@ export const getAvaliableSteps = (gameState: any) => {
 
 const AiRandomness = [0.75, 0.5, 0.25, 0]
 
-export const getAiStep = ( steps: Array<number[]>, aiLv: number, isMisere: boolean ) => {
+export const getAiStep = ( steps: Array<number[]>, aiLv: number, isMisere: boolean ): number[] => {
   if ( Math.random() < AiRandomness[aiLv] ) {
     return steps[getRandomInt(0, steps.length)]
   }
-  const bestMoves = steps.filter(step => step[2] === (isMisere ? 1 : 0)).sort( (a, b) => a[3] - b[3] )
+
+  const bestMoves = steps.filter(([,, nimSum, sum, allOnes, nonZeroCol]) => {
+    if ( !isMisere ) return nimSum === 0;
+    // if in misere game
+    if ( allOnes === 1 || nonZeroCol <= 1 )
+      return nimSum === 1
+    return nimSum === 0 && allOnes === 0
+  }).sort( (a, b) => a[3] - b[3] )
+
   if ( bestMoves.length ) {
     return bestMoves[0]
   }
@@ -49,10 +56,15 @@ export const getRandomInt = (min: number, max: number): number => {
 const getNimSum = ( board:number[][], stepLimit: number ) => {
   let nimSum = 0
   let sum = 0
+  let allOnes = true
+  let nonZeroCol = 0
   for ( var i=0; i<board[0].length; ++i) {
     if ( board[0][i] < 0 ) continue
-    nimSum ^= ( Math.abs(board[0][i] - board[1][i]) - 1 ) % (stepLimit + 1)
-    sum += ( Math.abs(board[0][i] - board[1][i]) - 1 )
+    let diff = Math.abs(board[0][i] - board[1][i]) - 1
+    sum += diff
+    nimSum ^= diff % (stepLimit + 1)
+    allOnes = allOnes && diff <= 1
+    nonZeroCol += ( diff > 0 ? 1 : 0 )
   }
-  return [nimSum, sum]
+  return [nimSum, sum, allOnes ? 1 : 0, nonZeroCol]
 }
