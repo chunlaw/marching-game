@@ -96,6 +96,7 @@ export interface GameStateProps {
   stepLimit: number;
   isAi: boolean;
   playerFirst: boolean;
+  lastMove?: number[];
 }
 
 export interface RecordsProps {

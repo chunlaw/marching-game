@@ -6,14 +6,24 @@ import { isAvailableStep as checkAvailableStep } from '../ai'
 
 const Grid = ({x, y, player, onClick}: {x: number, y: number, player?: number, onClick: (valid: boolean) => void}) => {
   const classes = useStyles()
-  const { gameState: {board, round, stepLimit}, selectedToken } = useContext( GameContext )
+  const { gameState: {board, round, stepLimit, lastMove}, selectedToken } = useContext( GameContext )
   const isSelected = () => {
     return selectedToken && selectedToken.x === x && selectedToken.y === y
   }
-
+  
   const isAvailableStep = (): boolean => {
     if ( !selectedToken ) return false
     return checkAvailableStep(board, round, selectedToken, {x, y}, stepLimit)
+  }
+
+  const isLastMove = (): boolean => {
+    if ( lastMove ) {
+      const [last_x, last_y] = lastMove
+      const v = board[round%2 ^ 1][x]
+      const range = [Math.min(v, last_y), Math.max(v, last_y)]
+      return last_x === x && range[0] <= y && y <= range[1] 
+    }
+    return false
   }
 
   return (
@@ -24,6 +34,9 @@ const Grid = ({x, y, player, onClick}: {x: number, y: number, player?: number, o
       style={{background: backgroundColor[(x+y) % 2]}}
       onClick={() => onClick(isAvailableStep())}
     >
+      <div
+        className={`${isLastMove() ? classes.lastStepLayer : ''}`}
+      ></div>
       <div
         className={`${isAvailableStep() ? classes.stepLayer : ''}`}
       ></div>
@@ -61,6 +74,14 @@ const useStyles = makeStyles(theme => ({
     width: '96%',
     paddingTop: '96%',
     background: 'rgba(152, 251, 152, 0.8)'
+  },
+  lastStepLayer: {
+    position: 'absolute',
+    top: '2%',
+    left: '2%',
+    width: '96%',
+    paddingTop: '96%',
+    background: 'rgba(251, 152, 152, 0.8)'
   },
   chessLayer: {
     position: 'absolute',

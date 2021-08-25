@@ -58,6 +58,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
           return {
             ...prev,
             board: _board,
+            lastMove: [x, prev.board[round%2][x]],
             round: prev.round + 1
           } 
         })
@@ -97,6 +98,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
     } else if ( validStep ) {
       setGameState ( prev => {
         const _ret = JSON.parse(JSON.stringify(gameState))
+        _ret.lastMove = [coor.x, gameState.board[round%2][coor.x]]
         _ret.board[round % 2][coor.x] = coor.y
         _ret.round += 1
         return _ret

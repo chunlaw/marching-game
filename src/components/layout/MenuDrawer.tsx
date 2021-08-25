@@ -23,7 +23,7 @@ const MenuDrawer = ({open, onClose}: {open: boolean, onClose: () => void}) => {
   return (
     <Drawer 
       open={open} 
-      ModalProps={{ onBackdropClick: onClose }}
+      ModalProps={{ onClose: () => onClose() }}
       className={classes.container} 
       PaperProps={{className: classes.innerContainer}}
     >
