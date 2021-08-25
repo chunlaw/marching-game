@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/marching-game/static/css/main.a617e044.chunk.css",
-    "main.js": "/marching-game/static/js/main.2b99258e.chunk.js",
-    "main.js.map": "/marching-game/static/js/main.2b99258e.chunk.js.map",
+    "main.js": "/marching-game/static/js/main.58948cf5.chunk.js",
+    "main.js.map": "/marching-game/static/js/main.58948cf5.chunk.js.map",
     "runtime-main.js": "/marching-game/static/js/runtime-main.44b78420.js",
     "runtime-main.js.map": "/marching-game/static/js/runtime-main.44b78420.js.map",
     "static/js/2.72263445.chunk.js": "/marching-game/static/js/2.72263445.chunk.js",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.44b78420.js",
     "static/js/2.72263445.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.2b99258e.chunk.js"
+    "static/js/main.58948cf5.chunk.js"
   ]
 }
