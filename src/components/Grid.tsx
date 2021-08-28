@@ -16,14 +16,17 @@ const Grid = ({x, y, player, onClick}: {x: number, y: number, player?: number, o
     return checkAvailableStep(board, round, selectedToken, {x, y}, stepLimit)
   }
 
-  const isLastMove = (): boolean => {
+  const getLastMoveClass = (): string => {
     if ( lastMove ) {
       const [last_x, last_y] = lastMove
+      if ( last_x === x && last_y === y ) 
+        return classes.lastPositionLayer
       const v = board[round%2 ^ 1][x]
       const range = [Math.min(v, last_y), Math.max(v, last_y)]
-      return last_x === x && range[0] <= y && y <= range[1] 
+      if ( last_x === x && range[0] <= y && y <= range[1] )
+        return classes.lastStepLayer
     }
-    return false
+    return ''
   }
 
   return (
@@ -35,7 +38,7 @@ const Grid = ({x, y, player, onClick}: {x: number, y: number, player?: number, o
       onClick={() => onClick(isAvailableStep())}
     >
       <div
-        className={`${isLastMove() ? classes.lastStepLayer : ''}`}
+        className={getLastMoveClass()}
       ></div>
       <div
         className={`${isAvailableStep() ? classes.stepLayer : ''}`}
@@ -75,10 +78,18 @@ const useStyles = makeStyles(theme => ({
     paddingTop: '96%',
     background: 'rgba(152, 251, 152, 0.8)'
   },
+  lastPositionLayer: {
+    position: 'absolute',
+    top: '3%',
+    left: '3%',
+    width: '96%',
+    paddingTop: '90%',
+    border: '1px dashed black'
+  },
   lastStepLayer: {
     position: 'absolute',
     top: '2%',
-    left: '2%',
+    left: '3%',
     width: '96%',
     paddingTop: '96%',
     background: 'rgba(251, 152, 152, 0.8)'
