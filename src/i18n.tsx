@@ -4,6 +4,7 @@ import resources from "./i18n/translation.json";
 
 const DEFAULT_LANG = window.location.pathname.substr(1,2) === 'en' ? 'en' : 'zh'
 
+// @ts-ignore
 i18n
   .use(initReactI18next)
   .init({
