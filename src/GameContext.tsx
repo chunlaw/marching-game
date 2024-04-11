@@ -29,7 +29,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
   const [gameState, setGameState] = useState<GameStateProps>(Level[level])
   const [selectedToken, setSelectedToken] = useState<CoordinateProps | null>(null)
   const [winner, setWinner] = useState<number|null>(null)
-  const [records, setRecords] = useState<RecordsProps>(JSON.parse(localStorage.getItem('@records') || 'null') || Level.reduce((acc, lv, idx) => ({...acc, [idx]: [0,0,0,0]}), {}))
+  const [records, setRecords] = useState<RecordsProps>(JSON.parse(localStorage.getItem('@records') || 'null') || Level.reduce((acc, _, idx) => ({...acc, [idx]: [0,0,0,0]}), {}))
   const [isMisere, setIsMisere] = useState<boolean>(false)
   const aiLv = useRef<number>(0)
 
@@ -81,7 +81,9 @@ export const GameContextProvider = ({children}: {children: any}) => {
   }, [records])
 
   useEffect(() => {
-    document.getElementsByTagName('body')[0].style.cssText = isMisere ? "filter: invert(1); background: black; height: 100vh" : ""    
+    document.getElementsByTagName('body')[0].className = isMisere 
+      ? "invertBody" 
+      : ""    
   }, [isMisere])
 
   const onBoardClick = ( coor: CoordinateProps, validStep: boolean|undefined ) => {
@@ -96,7 +98,7 @@ export const GameContextProvider = ({children}: {children: any}) => {
       setSelectedToken(coor)
       return
     } else if ( validStep ) {
-      setGameState ( prev => {
+      setGameState ( () => {
         const _ret = JSON.parse(JSON.stringify(gameState))
         _ret.lastMove = [coor.x, gameState.board[round%2][coor.x]]
         _ret.board[round % 2][coor.x] = coor.y

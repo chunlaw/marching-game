@@ -1,10 +1,12 @@
-import { Button, Divider, FormControlLabel, makeStyles, Switch, Typography } from '@material-ui/core'
+import { Box, Button, Divider, FormControlLabel, Paper, Switch, SxProps, Theme, Typography } from '@mui/material'
 import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import StarIcon from '@material-ui/icons/Star';
-import ReplayIcon from '@material-ui/icons/Replay';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import {
+  Star as StarIcon,
+  Replay as ReplayIcon,
+  NavigateBefore as NavigateBeforeIcon,
+  NavigateNext as NavigateNextIcon,
+} from "@mui/icons-material"
 import GameContext from '../GameContext'
 import { AiColors, Level, PlayerName } from '../constants';
 import { useHistory, useParams } from 'react-router-dom';
@@ -13,15 +15,14 @@ import { validLv } from '../utils';
 const GamePanel = () => {
   const { lvId } = useParams<{lvId: string | undefined}>()
   const { gameState: {round, playerFirst, isAi}, isMisere, aiLv, toggleAi, togglePlayer, resetGame } = useContext(GameContext) 
-  const classes = useStyles()
   const { t, i18n } = useTranslation()
   const history = useHistory()
  
   return (
-    <div className={classes.container}>
+    <Paper sx={containerSx}>
       <Typography variant="h5"><InfoMsg /></Typography>
       <Divider />
-      <div className={classes.setupButton}>
+      <Box sx={setupButtonSx}>
         <Button
           variant="contained"
           onClick={() => history.replace(`/${i18n.language}/${validLv(lvId)}`)}
@@ -32,7 +33,7 @@ const GamePanel = () => {
         <Button
           variant="contained"
           onClick={resetGame}
-          className={classes.resetButton}
+          sx={resetButtonSx}
         >
           <ReplayIcon />
           {t('Reset')}
@@ -44,8 +45,8 @@ const GamePanel = () => {
         >
           <NavigateNextIcon />
         </Button>
-      </div>
-      <div className={classes.setupButton}>
+      </Box>
+      <Box sx={setupButtonSx}>
         <FormControlLabel
           control={
             <Switch
@@ -66,8 +67,8 @@ const GamePanel = () => {
           }
           label={t('initiative')}
         />
-      </div>
-    </div>
+      </Box>
+    </Paper>
   )
 }
 
@@ -104,19 +105,22 @@ const InfoMsg = ( ) => {
   )
 }
 
-const useStyles = makeStyles (theme => ({
-  container: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  resetButton: {
-    width: '150px'
-  },
-  setupButton: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: '10px'
-  }
-}))
+
+const containerSx: SxProps<Theme> = {
+  display: 'flex',
+  flexDirection: 'column',
+  px: 2,
+  py: 1, 
+}
+
+const resetButtonSx: SxProps<Theme> = {
+  width: '150px'
+}
+
+const setupButtonSx: SxProps<Theme> = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginTop: '10px'
+}
 
 export default GamePanel

@@ -5,16 +5,13 @@ import {
   Route,
   useRouteMatch
 } from "react-router-dom";
-import { MuiThemeProvider } from "@material-ui/core"
-import { createTheme, makeStyles } from "@material-ui/core/styles"
-import { Container, CssBaseline } from '@material-ui/core'
+import { SxProps, Theme } from "@mui/material"
+import { Container } from '@mui/material'
 import GamePanel from './components/GamePanel'
 import Header from './components/layout/Header'
 import './App.css';
 import { GameContextProvider } from './GameContext';
 import Playground from './components/Playground';
-
-const theme = createTheme()
 
 const PageSwitch = () => {
   const { path } = useRouteMatch()
@@ -33,29 +30,26 @@ const PageSwitch = () => {
 }
 
 const App = () => {
-  const classes = useStyles()
   return (
-    <MuiThemeProvider theme={theme}>
-      <Container maxWidth='xs' disableGutters className={classes.appContainer}>
-        <Router>
-          <Route exact path="/">
-            <Redirect to="/zh" />
-          </Route>
-          <Route path="/:lang">
-            <CssBaseline />  
-            <PageSwitch />
-          </Route>
-        </Router>
-      </Container>
-    </MuiThemeProvider>
+    <Container maxWidth='xs' disableGutters sx={appContainerSx}>
+      <Router>
+        <Route exact path="/">
+          <Redirect to="/zh" />
+        </Route>
+        <Route path="/:lang">
+          <PageSwitch />
+        </Route>
+      </Router>
+    </Container>
   );
 }
 
 export default App;
 
-const useStyles = makeStyles(theme => ({
-  appContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-  }
-}))
+const appContainerSx: SxProps<Theme> = {
+  display: 'flex',
+  flexDirection: 'column',
+  flex: 1,
+  height: '100%',
+  justifyContent: "space-between",
+}

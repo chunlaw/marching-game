@@ -1,11 +1,10 @@
 import Grid from './Grid'
-import { makeStyles } from '@material-ui/core'
 import GameContext from '../GameContext'
 import { useContext } from 'react'
+import { Box, SxProps, Theme } from '@mui/material'
 
 const Playground = () => {
   const { gameState: {board}, isMisere, onBoardClick } = useContext(GameContext)
-  const classes = useStyles()
 
   const X = 'ABCDEFGH'.split('')
   const Y = '1234567890'.split('')
@@ -17,13 +16,13 @@ const Playground = () => {
   }
   
   return (
-    <div className={classes.container} style={{filter: `invert(${isMisere ? 1 : 0})`}}>
-      <div className={classes.yAxisContainer} style={{filter: `invert(${isMisere ? 1 : 0})`}}>
-        {Y.map((y, i) => <div key={`axis-${i}`}>{i+1}</div>)}
-      </div>
+    <Box sx={containerSx} style={{filter: `invert(${isMisere ? 1 : 0})`}}>
+      <Box sx={yAxisContainerSx} style={{filter: `invert(${isMisere ? 1 : 0})`}}>
+        {Y.map((_, i) => <div key={`axis-${i}`}>{i+1}</div>)}
+      </Box>
       {
         X.map((x, i) => (
-          <div key={`line-${x}`} className={classes.lineContainer}>
+          <Box key={`line-${x}`} sx={lineContainerSx}>
             <div style={{filter: `invert(${isMisere ? 1 : 0})`}}>{x}</div>
             {
               Y.map((y, j) => (
@@ -36,33 +35,33 @@ const Playground = () => {
                 />
               ))
             }
-          </div>
+          </Box>
         ))
       }
-    </div>
+    </Box>
   )
 }
 
-const useStyles = makeStyles (theme => ({
-  container: {
-    flexDirection: 'row',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center'
-  },
-  lineContainer: {
-    width: '10%',
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection: 'column-reverse'
-  },
-  yAxisContainer: {
-    display: 'flex',
-    flexDirection: 'column-reverse',
-    justifyContent: 'space-around',
-    paddingRight: '5px',
-    paddingBottom: '20px'
-  }
-}))
+const containerSx: SxProps<Theme> = {
+  flexDirection: 'row',
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center'
+}
+
+const lineContainerSx: SxProps<Theme> = {
+  width: '10%',
+  textAlign: 'center',
+  display: 'flex',
+  flexDirection: 'column-reverse'
+}
+
+const yAxisContainerSx: SxProps<Theme> = {
+  display: 'flex',
+  flexDirection: 'column-reverse',
+  justifyContent: 'space-around',
+  paddingRight: '5px',
+  paddingBottom: '20px'
+}
 
 export default Playground

@@ -33,7 +33,7 @@ export const getAiStep = ( steps: Array<number[]>, aiLv: number, isMisere: boole
     return steps[getRandomInt(0, steps.length)]
   }
 
-  const bestMoves = steps.filter(([,, nimSum, sum, allOnes, nonZeroCol]) => {
+  const bestMoves = steps.filter(([,, nimSum, allOnes, nonZeroCol]) => {
     if ( !isMisere ) return nimSum === 0;
     // if in misere game
     if ( allOnes === 1 || nonZeroCol <= 1 )

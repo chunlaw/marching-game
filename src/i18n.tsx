@@ -9,7 +9,6 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    whitelist: ['en', 'zh'],
     lowerCaseLng: true,
     lng: DEFAULT_LANG,
     nsSeparator: false,
